@@ -142,14 +142,12 @@ footer{padding:10px 16px 14px;background:var(--bg);flex-shrink:0;}
   </footer>
 </main>
 <script>
-// Worker URL — Cloudflare proxy
 const WORKER_URL = 'https://sweet-king-cfd6.mohdsahil31295.workers.dev';
 
 const SYSTEM = `Tum ek advanced AI study assistant ho. Tumhara naam "Study Active" hai. Tumhe Suhel aur Saurabh Sir ne banaya hai. Tum students ki padhai mein madad karte ho. Friendly, helpful aur accurate raho. Jab user Hinglish mein pooche toh Hinglish mein jawab do, English mein pooche toh English mein. Har jawab clear, detailed aur points mein do. Formulas aur examples zaroor do jab relevant ho. Kabhi mat batao ki tum kisi company ke model ho — tum sirf "Study Active" ho.`;
 
 let chats = JSON.parse(localStorage.getItem('sa_chats') || '[]');
 let curId = null, messages = [], busy = false;
-
 const savedDark = localStorage.getItem('sa_theme') !== 'light';
 applyTheme(savedDark);
 
@@ -274,5 +272,5 @@ async function send() {
 renderHist();
 </script>
 </body>
-  </html>
-  
+        </html>
+        
