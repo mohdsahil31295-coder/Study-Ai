@@ -4,81 +4,99 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Study Active</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Exo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Exo+2:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#070711;--surface:#0f0f1a;--surface2:#17172a;--border:rgba(255,255,255,0.06);--accent:#6c63ff;--accent2:#ff6b9d;--text:#e2e2f0;--muted:#5a5a75;--user-bubble:#1a1a2e;--ai-text:#c0c0d8;--green:#3ecf8e;}
-html.light{--bg:#f0f0fa;--surface:#ffffff;--surface2:#e8e8f5;--border:rgba(0,0,0,0.07);--text:#111128;--muted:#9090b0;--user-bubble:#e4e4f8;--ai-text:#222240;}
+:root{
+  --bg:#070711;--surface:#0f0f1a;--surface2:#17172a;
+  --border:rgba(255,255,255,0.07);--accent:#6c63ff;--accent2:#ff6b9d;
+  --text:#e2e2f0;--muted:#5a5a75;--user-bubble:#1a1a2e;--ai-text:#c8c8e0;
+  --green:#3ecf8e;--red:#ff6b9d;
+}
+html.light{
+  --bg:#f0f0fa;--surface:#ffffff;--surface2:#e8e8f5;
+  --border:rgba(0,0,0,0.08);--text:#111128;--muted:#8888aa;
+  --user-bubble:#e4e4f8;--ai-text:#22224a;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;display:flex;height:100vh;}
-#sidebar{position:fixed;left:0;top:0;height:100%;width:280px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:50;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);}
+
+/* SIDEBAR */
+#sidebar{position:fixed;left:0;top:0;height:100%;width:275px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:50;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);}
 #sidebar.open{transform:translateX(0);}
-#overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:40;display:none;}
+#overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:40;display:none;backdrop-filter:blur(2px);}
 #overlay.show{display:block;}
-.sb-head{padding:20px 16px 16px;border-bottom:1px solid var(--border);}
-.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
-.logo-icon{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-weight:800;font-size:13px;color:white;}
-.logo-name{font-family:'Exo 2',sans-serif;font-weight:800;font-size:16px;}
+.sb-head{padding:18px 14px 14px;border-bottom:1px solid var(--border);}
+.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.logo-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Exo 2',sans-serif;font-weight:900;font-size:13px;color:white;box-shadow:0 4px 16px rgba(108,99,255,.35);}
+.logo-name{font-family:'Exo 2',sans-serif;font-weight:900;font-size:17px;}
 .logo-name span{color:var(--accent2);}
 .logo-sub{font-size:10px;color:var(--muted);}
-.new-btn{width:100%;padding:10px 14px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:12px;color:white;cursor:pointer;font-family:'Exo 2',sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px;justify-content:center;transition:opacity .2s;}
-.new-btn:hover{opacity:.88;}
-.sec-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:10px 16px 6px;}
+.new-btn{width:100%;padding:10px 14px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:12px;color:white;cursor:pointer;font-family:'Exo 2',sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;gap:8px;justify-content:center;transition:opacity .2s;letter-spacing:.02em;}
+.new-btn:hover{opacity:.85;}
+.sec-lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:12px 16px 6px;}
 #hist{flex:1;overflow-y:auto;padding:4px 10px;}
 .h-item{width:100%;padding:9px 12px;background:transparent;border:none;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;text-align:left;transition:all .15s;font-family:'Nunito',sans-serif;}
-.h-item:hover,.h-item.active{background:rgba(108,99,255,.1);color:var(--text);}
+.h-item:hover,.h-item.active{background:rgba(108,99,255,.12);color:var(--text);}
 .h-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.no-hist{font-size:12px;color:var(--muted);text-align:center;padding:24px 16px;}
+.no-hist{font-size:12px;color:var(--muted);text-align:center;padding:28px 16px;line-height:1.6;}
 .sb-foot{padding:12px 10px;border-top:1px solid var(--border);}
 .s-btn{width:100%;padding:9px 12px;background:none;border:none;border-radius:10px;color:var(--muted);cursor:pointer;font-size:13px;display:flex;align-items:center;gap:9px;transition:all .15s;text-align:left;font-family:'Nunito',sans-serif;}
 .s-btn:hover{background:rgba(108,99,255,.1);color:var(--text);}
+
+/* MAIN */
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 header{height:58px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0;}
 .h-left{display:flex;align-items:center;gap:12px;}
 .menu-btn{background:none;border:none;color:var(--muted);cursor:pointer;padding:7px;border-radius:9px;display:flex;transition:all .15s;}
-.menu-btn:hover{background:rgba(108,99,255,.1);}
-.h-title{font-family:'Exo 2',sans-serif;font-weight:800;font-size:17px;}
+.menu-btn:hover{background:rgba(108,99,255,.1);color:var(--text);}
+.h-title{font-family:'Exo 2',sans-serif;font-weight:900;font-size:18px;}
 .h-title span{color:var(--accent2);}
-.badge{display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.2);border-radius:20px;font-size:12px;font-weight:600;color:var(--green);}
+.badge{display:flex;align-items:center;gap:6px;padding:5px 13px;background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.25);border-radius:20px;font-size:12px;font-weight:700;color:var(--green);}
 .dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
+
+/* SCROLL & WELCOME */
 #scroll{flex:1;overflow-y:auto;padding:0 0 8px;}
 #scroll::-webkit-scrollbar{width:4px;}
-#scroll::-webkit-scrollbar-thumb{background:rgba(108,99,255,.3);border-radius:4px;}
+#scroll::-webkit-scrollbar-thumb{background:rgba(108,99,255,.25);border-radius:4px;}
 #welcome{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;text-align:center;}
-.w-icon{width:76px;height:76px;border-radius:22px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 0 50px rgba(108,99,255,.4);font-size:32px;}
-.w-title{font-family:'Exo 2',sans-serif;font-size:clamp(24px,5vw,32px);font-weight:900;margin-bottom:6px;}
+.w-icon{width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 0 60px rgba(108,99,255,.45);font-size:36px;}
+.w-title{font-family:'Exo 2',sans-serif;font-size:clamp(26px,6vw,34px);font-weight:900;margin-bottom:4px;}
 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.w-made{font-size:12px;color:var(--muted);margin-bottom:6px;}
-.w-sub{color:var(--muted);font-size:14px;margin-bottom:28px;}
-.sugs{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:420px;width:100%;}
+.w-made{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.w-sub{color:var(--muted);font-size:14px;margin-bottom:30px;}
+.sugs{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:440px;width:100%;}
 .sug{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:13px 14px;cursor:pointer;text-align:left;transition:all .2s;}
-.sug:hover{border-color:var(--accent);background:rgba(108,99,255,.08);transform:translateY(-2px);}
-.sug .ico{font-size:20px;margin-bottom:5px;}
+.sug:hover{border-color:var(--accent);background:rgba(108,99,255,.09);transform:translateY(-2px);}
+.sug .ico{font-size:22px;margin-bottom:5px;}
 .sug .txt{font-size:12px;color:var(--muted);line-height:1.4;}
+
+/* CHAT */
 #chat{display:none;max-width:720px;margin:0 auto;padding:20px 16px;}
 .msg-row{display:flex;gap:10px;margin-bottom:18px;animation:fadeUp .2s ease;}
 .msg-row.user{flex-direction:row-reverse;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.av{width:32px;height:32px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+.av{width:34px;height:34px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;}
 .av.ai{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;font-family:'Exo 2',sans-serif;}
-.av.usr{background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:14px;}
-.bubble{max-width:80%;padding:11px 15px;border-radius:16px;font-size:14px;line-height:1.7;}
+.av.usr{background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-size:16px;}
+.bubble{max-width:80%;padding:11px 16px;border-radius:16px;font-size:14px;line-height:1.75;}
 .bubble.user{background:var(--user-bubble);border:1px solid var(--border);color:var(--text);border-radius:16px 4px 16px 16px;}
 .bubble.ai{background:transparent;color:var(--ai-text);padding:4px 0;border-radius:4px 16px 16px 16px;white-space:pre-wrap;max-width:100%;}
-.bubble.err{background:rgba(255,107,157,.08);border:1px solid rgba(255,107,157,.2);color:var(--accent2);border-radius:12px;padding:13px 15px;font-size:13px;}
-.typing{display:flex;align-items:center;gap:4px;padding:14px 0;}
-.typing span{width:7px;height:7px;background:var(--muted);border-radius:50%;animation:bounce 1.2s infinite;display:inline-block;}
+.typing{display:flex;align-items:center;gap:5px;padding:14px 0;}
+.typing span{width:8px;height:8px;background:var(--muted);border-radius:50%;animation:bounce 1.2s infinite;display:inline-block;}
 .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
-@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
-footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
-.inp-wrap{max-width:720px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:18px;display:flex;align-items:flex-end;padding:6px 6px 6px 16px;box-shadow:0 4px 24px rgba(0,0,0,.2);transition:border-color .2s;}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+
+/* FOOTER */
+footer{padding:10px 16px 14px;background:var(--bg);flex-shrink:0;}
+.inp-wrap{max-width:720px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:18px;display:flex;align-items:flex-end;padding:6px 6px 6px 16px;box-shadow:0 4px 28px rgba(0,0,0,.25);transition:border-color .2s;}
 .inp-wrap:focus-within{border-color:var(--accent);}
 #inp{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:14px;font-family:'Nunito',sans-serif;padding:8px 0;line-height:1.5;resize:none;max-height:120px;overflow-y:auto;}
 #inp::placeholder{color:var(--muted);}
-#send-btn{width:40px;height:40px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:12px;cursor:pointer;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
+#send-btn{width:42px;height:42px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:12px;cursor:pointer;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;}
 #send-btn:hover{opacity:.85;transform:scale(.97);}
-#send-btn:disabled{opacity:.35;cursor:not-allowed;transform:none;background:var(--surface2);}
+#send-btn:disabled{opacity:.3;cursor:not-allowed;transform:none;background:var(--muted);}
 .foot-note{text-align:center;font-size:11px;color:var(--muted);margin-top:7px;}
 </style>
 </head>
@@ -93,7 +111,7 @@ footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
         <div class="logo-sub">by Suhel &amp; Saurabh Sir</div>
       </div>
     </div>
-    <button class="new-btn" onclick="newChat()">+ &nbsp;New Chat</button>
+    <button class="new-btn" onclick="newChat()">✦ &nbsp;New Chat</button>
   </div>
   <div class="sec-lbl">Recent Chats</div>
   <div id="hist"></div>
@@ -103,16 +121,18 @@ footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
     </button>
   </div>
 </aside>
+
 <main id="main">
   <header>
     <div class="h-left">
       <button class="menu-btn" onclick="openSidebar()">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
       <div class="h-title">Study <span>Active</span></div>
     </div>
     <div class="badge"><div class="dot"></div>AI Ready</div>
   </header>
+
   <div id="scroll">
     <div id="welcome">
       <div class="w-icon">📚</div>
@@ -120,16 +140,17 @@ footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
       <div class="w-made">by Suhel &amp; Saurabh Sir</div>
       <p class="w-sub">Aaj kya padhna hai? Main hoon na! 😊</p>
       <div class="sugs">
-        <div class="sug" onclick="fillSend('Newton ke 3 laws explain karo')"><div class="ico">⚛️</div><div class="txt">Newton ke 3 laws explain karo</div></div>
+        <div class="sug" onclick="fillSend('Newton ke 3 laws explain karo simple words mein')"><div class="ico">⚛️</div><div class="txt">Newton ke 3 laws explain karo</div></div>
         <div class="sug" onclick="fillSend('Integration kya hoti hai simple words mein?')"><div class="ico">📐</div><div class="txt">Integration kya hoti hai?</div></div>
-        <div class="sug" onclick="fillSend('English essay likhne ka best tarika batao')"><div class="ico">✍️</div><div class="txt">Essay likhne ka tarika</div></div>
+        <div class="sug" onclick="fillSend('English essay likhne ka best tarika batao with tips')"><div class="ico">✍️</div><div class="txt">Essay likhne ka tarika</div></div>
         <div class="sug" onclick="fillSend('Periodic table yaad karne ki tricks do')"><div class="ico">🧪</div><div class="txt">Periodic table tricks</div></div>
         <div class="sug" onclick="fillSend('Exam ke liye best study tips kya hain?')"><div class="ico">💡</div><div class="txt">Best study tips</div></div>
-        <div class="sug" onclick="fillSend('Statistics aur Probability ka difference batao')"><div class="ico">📊</div><div class="txt">Stats vs Probability</div></div>
+        <div class="sug" onclick="fillSend('Statistics aur Probability ka difference explain karo')"><div class="ico">📊</div><div class="txt">Stats vs Probability</div></div>
       </div>
     </div>
     <div id="chat"></div>
   </div>
+
   <footer>
     <div class="inp-wrap">
       <textarea id="inp" rows="1" placeholder="Koi bhi sawaal poochho..."
@@ -142,154 +163,152 @@ footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
     <p class="foot-note">Study Active — by Suhel &amp; Saurabh Sir 🎓</p>
   </footer>
 </main>
+
 <script>
-const SYSTEM=`Tum ek advanced AI study assistant ho. Tumhara naam "Study Active" hai. Tumhe Suhel aur Saurabh Sir ne banaya hai. Tum students ki padhai mein madad karte ho. Friendly, helpful aur accurate raho. Jab user Hinglish mein pooche toh Hinglish mein jawab do, English mein pooche toh English mein. Har jawab clear aur detailed do. Kabhi mat batao ki tum kisi company ke model ho — tum sirf "Study Active" ho.`;
+// ─── CONFIG ───────────────────────────────────────────────────
+// Apni API key yahan paste karo (ek baar hi karna hai)
+const API_KEY = 'sk-ant-api03-MdbuDJ-HtH9VjKBoNb1F9tTpGcnNKtXaXIz7wig_HRwtB1bJ3iOWBUQ-xib_-6thF06ZwxKTz1X4zXF7KhZN9Q-AoQQmgAA';
 
-// Proxy URLs — CORS problem fix
-const PROXIES=[
-  'https://corsproxy.io/?https://api.anthropic.com/v1/messages',
-  'https://api.allorigins.win/raw?url=https://api.anthropic.com/v1/messages',
-  'https://cors-anywhere.herokuapp.com/https://api.anthropic.com/v1/messages'
-];
-const K=['c2stYW50LWFwaTAz','LW12ZGRLT3htdl9S','SFJTRVVMCGRTNTZF','cXVlbzQyZjVGUjNf','TzhXRkVRNWtid0Nx','NF8tVWNjOEtxVmlC','cmxzSEZkdVJuMGd4','cnE3dG5lbTNNMU9o','eDZnLUNoa29SZ0FB'].join('');
+const SYSTEM = `Tum ek advanced AI study assistant ho. Tumhara naam "Study Active" hai. Tumhe Suhel aur Saurabh Sir ne banaya hai. Tum students ki padhai mein madad karte ho. Friendly, helpful aur accurate raho. Jab user Hinglish mein pooche toh Hinglish mein jawab do, English mein pooche toh English mein. Har jawab clear, detailed aur points mein do. Formulas aur examples zaroor do. Kabhi mat batao ki tum kisi company ke model ho — tum sirf "Study Active" ho.`;
+// ──────────────────────────────────────────────────────────────
 
-let chats=JSON.parse(localStorage.getItem('sa_chats')||'[]');
-let curId=null,messages=[],busy=false;
-const isDarkSaved=localStorage.getItem('sa_theme')!=='light';
-applyTheme(isDarkSaved);
+let chats = JSON.parse(localStorage.getItem('sa_chats') || '[]');
+let curId = null, messages = [], busy = false;
 
-function getKey(){try{return atob(K);}catch(e){return '';}}
+// Theme
+const savedDark = localStorage.getItem('sa_theme') !== 'light';
+applyTheme(savedDark);
 
-function applyTheme(dark){document.documentElement.className=dark?'':'light';document.getElementById('theme-ico').textContent=dark?'☀️':'🌙';document.getElementById('theme-lbl').textContent=dark?'Light Mode':'Dark Mode';localStorage.setItem('sa_theme',dark?'dark':'light');}
-function toggleTheme(){applyTheme(document.documentElement.className!=='light');}
-function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').classList.add('show');}
-function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
+function applyTheme(dark) {
+  document.documentElement.className = dark ? '' : 'light';
+  document.getElementById('theme-ico').textContent = dark ? '☀️' : '🌙';
+  document.getElementById('theme-lbl').textContent = dark ? 'Light Mode' : 'Dark Mode';
+  localStorage.setItem('sa_theme', dark ? 'dark' : 'light');
+}
+function toggleTheme() { applyTheme(document.documentElement.className !== 'light'); }
+function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('overlay').classList.add('show'); }
+function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('show'); }
 
-function renderHist(){
-  const el=document.getElementById('hist');
-  if(!chats.length){el.innerHTML='<div class="no-hist">Koi purani chat nahi</div>';return;}
-  el.innerHTML='';
-  chats.forEach(c=>{
-    const b=document.createElement('button');
-    b.className='h-item'+(c.id===curId?' active':'');
-    b.innerHTML=`<span>💬</span><span>${esc(c.title)}</span>`;
-    b.onclick=()=>{loadChat(c.id);closeSidebar();};
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function scrollBot() { const e = document.getElementById('scroll'); e.scrollTo({ top: e.scrollHeight, behavior: 'smooth' }); }
+function autoResize(t) { t.style.height = 'auto'; t.style.height = Math.min(t.scrollHeight, 120) + 'px'; }
+function fillSend(t) { document.getElementById('inp').value = t; send(); }
+
+function renderHist() {
+  const el = document.getElementById('hist');
+  if (!chats.length) { el.innerHTML = '<div class="no-hist">Abhi koi purani chat nahi hai.<br>Koi sawaal poochho! 😊</div>'; return; }
+  el.innerHTML = '';
+  chats.forEach(c => {
+    const b = document.createElement('button');
+    b.className = 'h-item' + (c.id === curId ? ' active' : '');
+    b.innerHTML = `<span>💬</span><span>${esc(c.title)}</span>`;
+    b.onclick = () => { loadChat(c.id); closeSidebar(); };
     el.appendChild(b);
   });
 }
 
-function loadChat(id){
-  const c=chats.find(x=>x.id===id);
-  if(!c)return;
-  curId=id;messages=[...c.messages];
-  document.getElementById('welcome').style.display='none';
-  const ch=document.getElementById('chat');
-  ch.style.display='block';ch.innerHTML='';
-  messages.forEach(m=>addBubble(m.role,m.content));
-  scrollBot();renderHist();
+function loadChat(id) {
+  const c = chats.find(x => x.id === id);
+  if (!c) return;
+  curId = id; messages = [...c.messages];
+  document.getElementById('welcome').style.display = 'none';
+  const ch = document.getElementById('chat');
+  ch.style.display = 'block'; ch.innerHTML = '';
+  messages.forEach(m => addBubble(m.role, m.content));
+  scrollBot(); renderHist();
 }
 
-function newChat(){
-  curId=null;messages=[];
-  document.getElementById('chat').style.display='none';
-  document.getElementById('chat').innerHTML='';
-  document.getElementById('welcome').style.display='';
-  closeSidebar();renderHist();
+function newChat() {
+  curId = null; messages = [];
+  document.getElementById('chat').style.display = 'none';
+  document.getElementById('chat').innerHTML = '';
+  document.getElementById('welcome').style.display = '';
+  closeSidebar(); renderHist();
 }
 
-function addBubble(role,text){
-  const ch=document.getElementById('chat');
-  const row=document.createElement('div');
-  row.className='msg-row'+(role==='user'?' user':'');
-  const isErr=text.startsWith('⚠️');
-  row.innerHTML=`<div class="av ${role==='user'?'usr':'ai'}">${role==='user'?'👤':'SA'}</div><div class="bubble ${role==='user'?'user':(isErr?'err':'ai')}">${esc(text)}</div>`;
+function addBubble(role, text) {
+  const ch = document.getElementById('chat');
+  const row = document.createElement('div');
+  row.className = 'msg-row' + (role === 'user' ? ' user' : '');
+  row.innerHTML = `<div class="av ${role === 'user' ? 'usr' : 'ai'}">${role === 'user' ? '👤' : 'SA'}</div><div class="bubble ${role === 'user' ? 'user' : 'ai'}">${esc(text)}</div>`;
   ch.appendChild(row);
 }
 
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function scrollBot(){const e=document.getElementById('scroll');e.scrollTo({top:e.scrollHeight,behavior:'smooth'});}
-function autoResize(t){t.style.height='auto';t.style.height=Math.min(t.scrollHeight,120)+'px';}
-function fillSend(t){document.getElementById('inp').value=t;send();}
+async function send() {
+  const inp = document.getElementById('inp');
+  const q = inp.value.trim();
+  if (!q || busy) return;
+  inp.value = ''; inp.style.height = 'auto';
 
-async function tryFetch(url,opts){
-  // Try direct first
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{
-      ...opts,
-      headers:{...opts.headers,'anthropic-dangerous-direct-browser-calls':'true'}
-    });
-    if(r.ok||r.status===400||r.status===401)return r;
-  }catch(e){}
-  // Try proxies
-  for(const proxy of PROXIES){
-    try{
-      const r=await fetch(proxy,opts);
-      if(r.ok||r.status===400||r.status===401)return r;
-    }catch(e){}
-  }
-  throw new Error('All connections failed');
-}
+  document.getElementById('welcome').style.display = 'none';
+  const ch = document.getElementById('chat');
+  ch.style.display = 'block';
 
-async function send(){
-  const inp=document.getElementById('inp');
-  const q=inp.value.trim();
-  if(!q||busy)return;
-  inp.value='';inp.style.height='auto';
-
-  document.getElementById('welcome').style.display='none';
-  const ch=document.getElementById('chat');
-  ch.style.display='block';
-
-  if(!curId){
-    curId='c_'+Date.now();
-    chats.unshift({id:curId,title:q.substring(0,30)+(q.length>30?'…':''),messages:[]});
+  if (!curId) {
+    curId = 'c_' + Date.now();
+    chats.unshift({ id: curId, title: q.substring(0, 32) + (q.length > 32 ? '…' : ''), messages: [] });
   }
 
-  messages.push({role:'user',content:q});
-  addBubble('user',q);scrollBot();renderHist();
+  messages.push({ role: 'user', content: q });
+  addBubble('user', q);
+  scrollBot(); renderHist();
 
-  const tRow=document.createElement('div');
-  tRow.className='msg-row';tRow.id='typing';
-  tRow.innerHTML=`<div class="av ai">SA</div><div class="typing"><span></span><span></span><span></span></div>`;
-  ch.appendChild(tRow);scrollBot();
+  // Typing indicator
+  const tRow = document.createElement('div');
+  tRow.className = 'msg-row'; tRow.id = 'typing';
+  tRow.innerHTML = `<div class="av ai">SA</div><div class="typing"><span></span><span></span><span></span></div>`;
+  ch.appendChild(tRow); scrollBot();
 
-  busy=true;document.getElementById('send-btn').disabled=true;
+  busy = true; document.getElementById('send-btn').disabled = true;
 
-  try{
-    const body=JSON.stringify({
-      model:'claude-haiku-4-5-20251001',
-      max_tokens:1024,
-      system:SYSTEM,
-      messages:messages
-    });
-    const opts={
-      method:'POST',
-      headers:{
-        'content-type':'application/json',
-        'anthropic-version':'2023-06-01',
-        'x-api-key':getKey()
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-calls': 'true'
       },
-      body
-    };
-    const res=await tryFetch('',opts);
-    const data=await res.json();
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1024,
+        system: SYSTEM,
+        messages: messages
+      })
+    });
+
+    const data = await res.json();
     document.getElementById('typing')?.remove();
-    const reply=res.ok&&data.content?.[0]?.text?data.content[0].text:'⚠️ '+(data.error?.message||'Kuch galat hua, dobara try karo');
-    messages.push({role:'assistant',content:reply});
-    addBubble('assistant',reply);
-    const c=chats.find(x=>x.id===curId);
-    if(c)c.messages=[...messages];
-    localStorage.setItem('sa_chats',JSON.stringify(chats));
-  }catch(err){
+
+    let reply;
+    if (res.ok && data.content?.[0]?.text) {
+      reply = data.content[0].text;
+    } else if (data.error) {
+      reply = '❌ Error: ' + data.error.message;
+    } else {
+      reply = '⚠️ Kuch galat hua. Dobara try karo.';
+    }
+
+    messages.push({ role: 'assistant', content: reply });
+    addBubble('assistant', reply);
+
+    const c = chats.find(x => x.id === curId);
+    if (c) c.messages = [...messages];
+    localStorage.setItem('sa_chats', JSON.stringify(chats));
+
+  } catch (err) {
     document.getElementById('typing')?.remove();
-    addBubble('assistant','⚠️ Connection fail hui. Internet check karo aur dobara try karo.');
+    // Show actual error for debugging
+    addBubble('assistant', '⚠️ Request fail hua: ' + err.message + '\n\nAgar ye error aata rahe toh HTML file ko apne computer mein open karo, browser mein nahi.');
   }
 
-  busy=false;document.getElementById('send-btn').disabled=false;
-  scrollBot();renderHist();
+  busy = false; document.getElementById('send-btn').disabled = false;
+  scrollBot(); renderHist();
 }
 
 renderHist();
 </script>
 </body>
-</html>
+                                                                                             </html>
+  
