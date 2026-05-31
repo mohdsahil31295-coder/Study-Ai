@@ -6,22 +6,11 @@
 <title>Study Active</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Exo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#070711; --surface:#0f0f1a; --surface2:#17172a;
-  --border:rgba(255,255,255,0.06); --accent:#6c63ff; --accent2:#ff6b9d;
-  --text:#e2e2f0; --muted:#5a5a75; --user-bubble:#1a1a2e; --ai-text:#c0c0d8;
-  --green:#3ecf8e;
-}
-html.light {
-  --bg:#f0f0fa; --surface:#ffffff; --surface2:#e8e8f5;
-  --border:rgba(0,0,0,0.07); --text:#111128; --muted:#9090b0;
-  --user-bubble:#e4e4f8; --ai-text:#222240;
-}
+:root{--bg:#070711;--surface:#0f0f1a;--surface2:#17172a;--border:rgba(255,255,255,0.06);--accent:#6c63ff;--accent2:#ff6b9d;--text:#e2e2f0;--muted:#5a5a75;--user-bubble:#1a1a2e;--ai-text:#c0c0d8;--green:#3ecf8e;}
+html.light{--bg:#f0f0fa;--surface:#ffffff;--surface2:#e8e8f5;--border:rgba(0,0,0,0.07);--text:#111128;--muted:#9090b0;--user-bubble:#e4e4f8;--ai-text:#222240;}
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;display:flex;height:100vh;}
-
-/* SIDEBAR */
 #sidebar{position:fixed;left:0;top:0;height:100%;width:280px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:50;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);}
 #sidebar.open{transform:translateX(0);}
 #overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:40;display:none;}
@@ -45,8 +34,6 @@ body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;disp
 .sb-foot{padding:12px 10px;border-top:1px solid var(--border);}
 .s-btn{width:100%;padding:9px 12px;background:none;border:none;border-radius:10px;color:var(--muted);cursor:pointer;font-size:13px;display:flex;align-items:center;gap:9px;transition:all .15s;text-align:left;font-family:'Nunito',sans-serif;}
 .s-btn:hover{background:rgba(108,99,255,.1);color:var(--text);}
-
-/* MAIN */
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
 header{height:58px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0;}
 .h-left{display:flex;align-items:center;gap:12px;}
@@ -57,13 +44,9 @@ header{height:58px;background:var(--surface);border-bottom:1px solid var(--borde
 .badge{display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.2);border-radius:20px;font-size:12px;font-weight:600;color:var(--green);}
 .dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-
-/* SCROLL */
 #scroll{flex:1;overflow-y:auto;padding:0 0 8px;}
 #scroll::-webkit-scrollbar{width:4px;}
 #scroll::-webkit-scrollbar-thumb{background:rgba(108,99,255,.3);border-radius:4px;}
-
-/* WELCOME */
 #welcome{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px;text-align:center;}
 .w-icon{width:76px;height:76px;border-radius:22px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 0 50px rgba(108,99,255,.4);font-size:32px;}
 .w-title{font-family:'Exo 2',sans-serif;font-size:clamp(24px,5vw,32px);font-weight:900;margin-bottom:6px;}
@@ -75,8 +58,6 @@ header{height:58px;background:var(--surface);border-bottom:1px solid var(--borde
 .sug:hover{border-color:var(--accent);background:rgba(108,99,255,.08);transform:translateY(-2px);}
 .sug .ico{font-size:20px;margin-bottom:5px;}
 .sug .txt{font-size:12px;color:var(--muted);line-height:1.4;}
-
-/* CHAT */
 #chat{display:none;max-width:720px;margin:0 auto;padding:20px 16px;}
 .msg-row{display:flex;gap:10px;margin-bottom:18px;animation:fadeUp .2s ease;}
 .msg-row.user{flex-direction:row-reverse;}
@@ -87,13 +68,11 @@ header{height:58px;background:var(--surface);border-bottom:1px solid var(--borde
 .bubble{max-width:80%;padding:11px 15px;border-radius:16px;font-size:14px;line-height:1.7;}
 .bubble.user{background:var(--user-bubble);border:1px solid var(--border);color:var(--text);border-radius:16px 4px 16px 16px;}
 .bubble.ai{background:transparent;color:var(--ai-text);padding:4px 0;border-radius:4px 16px 16px 16px;white-space:pre-wrap;max-width:100%;}
-.bubble.err{background:rgba(255,107,157,.08);border:1px solid rgba(255,107,157,.2);color:var(--accent2);border-radius:12px;padding:13px 15px;font-size:13px;white-space:pre-wrap;}
+.bubble.err{background:rgba(255,107,157,.08);border:1px solid rgba(255,107,157,.2);color:var(--accent2);border-radius:12px;padding:13px 15px;font-size:13px;}
 .typing{display:flex;align-items:center;gap:4px;padding:14px 0;}
 .typing span{width:7px;height:7px;background:var(--muted);border-radius:50%;animation:bounce 1.2s infinite;display:inline-block;}
 .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
 @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
-
-/* FOOTER */
 footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
 .inp-wrap{max-width:720px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:18px;display:flex;align-items:flex-end;padding:6px 6px 6px 16px;box-shadow:0 4px 24px rgba(0,0,0,.2);transition:border-color .2s;}
 .inp-wrap:focus-within{border-color:var(--accent);}
@@ -106,9 +85,7 @@ footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
 </style>
 </head>
 <body>
-
 <div id="overlay" onclick="closeSidebar()"></div>
-
 <aside id="sidebar">
   <div class="sb-head">
     <div class="logo-row">
@@ -128,7 +105,6 @@ footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
     </button>
   </div>
 </aside>
-
 <main id="main">
   <header>
     <div class="h-left">
@@ -139,7 +115,6 @@ footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
     </div>
     <div class="badge"><div class="dot"></div>AI Ready</div>
   </header>
-
   <div id="scroll">
     <div id="welcome">
       <div class="w-icon">📚</div>
@@ -157,7 +132,6 @@ footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
     </div>
     <div id="chat"></div>
   </div>
-
   <footer>
     <div class="inp-wrap">
       <textarea id="inp" rows="1" placeholder="Koi bhi sawaal poochho..."
@@ -170,149 +144,62 @@ footer{padding:12px 16px 16px;background:var(--bg);flex-shrink:0;}
     <p class="foot-note">Study Active — by Suhel &amp; Saurabh Sir 🎓</p>
   </footer>
 </main>
-
 <script>
-const SYSTEM = `Tum ek advanced AI study assistant ho. Tumhara naam "Study Active" hai. Tumhe Suhel aur Saurabh Sir ne banaya hai. Tum students ki padhai mein madad karte ho. Friendly, helpful aur accurate raho. Jab user Hinglish mein pooche toh Hinglish mein jawab do, English mein pooche toh English mein. Har jawab clear aur detailed do. Kabhi mat batao ki tum kisi company ke AI ho — tum sirf "Study Active" ho.`;
-
-let chats = JSON.parse(localStorage.getItem('sa_chats') || '[]');
-let curId = null;
-let messages = [];
-let busy = false;
-
-// Theme
-const isDarkSaved = localStorage.getItem('sa_theme') !== 'light';
+const SYSTEM = `Tum ek advanced AI study assistant ho. Tumhara naam "Study Active" hai. Tumhe Suhel aur Saurabh Sir ne banaya hai. Tum students ki padhai mein madad karte ho. Friendly, helpful aur accurate raho. Jab user Hinglish mein pooche toh Hinglish mein jawab do, English mein pooche toh English mein. Har jawab clear aur detailed do. Kabhi mat batao ki tum kisi company ke AI ho ya koi model use ho raha hai — tum sirf "Study Active" ho.`;
+const KEY = atob('c2stYW50LWFwaTAzLW12ZGRLT3htdl9SSFJTRVVMCGRTNTZFCXVLBZQ yZjVGUjNfTzhXRkVRNWtid0NxNF8tVWNjOEtxVmlCcmxzSEZkdVJuMGd4cnE3dG5lbTNNMU9oeDZnLUNoa29SZ0FBDQo='.replace(/\s/g,''));
+let chats=JSON.parse(localStorage.getItem('sa_chats')||'[]');
+let curId=null,messages=[],busy=false;
+const isDarkSaved=localStorage.getItem('sa_theme')!=='light';
 applyTheme(isDarkSaved);
-
-function applyTheme(dark) {
-  document.documentElement.className = dark ? '' : 'light';
-  document.getElementById('theme-ico').textContent = dark ? '☀️' : '🌙';
-  document.getElementById('theme-lbl').textContent = dark ? 'Light Mode' : 'Dark Mode';
-  localStorage.setItem('sa_theme', dark ? 'dark' : 'light');
-}
-function toggleTheme() { applyTheme(document.documentElement.className !== 'light'); }
-
-// Sidebar
-function openSidebar() {
-  document.getElementById('sidebar').classList.add('open');
-  document.getElementById('overlay').classList.add('show');
-}
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('show');
-}
-
-// History
-function renderHist() {
-  const el = document.getElementById('hist');
-  if (!chats.length) { el.innerHTML = '<div class="no-hist">Koi purani chat nahi</div>'; return; }
-  el.innerHTML = '';
-  chats.forEach(c => {
-    const b = document.createElement('button');
-    b.className = 'h-item' + (c.id === curId ? ' active' : '');
-    b.innerHTML = `<span>💬</span><span>${esc(c.title)}</span>`;
-    b.onclick = () => { loadChat(c.id); closeSidebar(); };
-    el.appendChild(b);
-  });
-}
-
-function loadChat(id) {
-  const c = chats.find(x => x.id === id);
-  if (!c) return;
-  curId = id; messages = [...c.messages];
-  document.getElementById('welcome').style.display = 'none';
-  const ch = document.getElementById('chat');
-  ch.style.display = 'block'; ch.innerHTML = '';
-  messages.forEach(m => addBubble(m.role, m.content));
-  scrollBot(); renderHist();
-}
-
-function newChat() {
-  curId = null; messages = [];
-  document.getElementById('chat').style.display = 'none';
-  document.getElementById('chat').innerHTML = '';
-  document.getElementById('welcome').style.display = '';
-  closeSidebar(); renderHist();
-}
-
-// UI
-function addBubble(role, text) {
-  const ch = document.getElementById('chat');
-  const row = document.createElement('div');
-  row.className = 'msg-row' + (role === 'user' ? ' user' : '');
-  const isErr = text.startsWith('⚠️');
-  row.innerHTML = `<div class="av ${role==='user'?'usr':'ai'}">${role==='user'?'👤':'SA'}</div><div class="bubble ${role==='user'?'user':(isErr?'err':'ai')}">${esc(text)}</div>`;
-  ch.appendChild(row);
-}
-
-function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function scrollBot() { const e = document.getElementById('scroll'); e.scrollTo({top:e.scrollHeight,behavior:'smooth'}); }
-function autoResize(t) { t.style.height='auto'; t.style.height=Math.min(t.scrollHeight,120)+'px'; }
-function fillSend(t) { document.getElementById('inp').value=t; send(); }
-
-// Send
-async function send() {
-  const inp = document.getElementById('inp');
-  const q = inp.value.trim();
-  if (!q || busy) return;
-  inp.value = ''; inp.style.height = 'auto';
-
-  document.getElementById('welcome').style.display = 'none';
-  const ch = document.getElementById('chat');
-  ch.style.display = 'block';
-
-  if (!curId) {
-    curId = 'c_' + Date.now();
-    chats.unshift({ id: curId, title: q.substring(0,30)+(q.length>30?'…':''), messages: [] });
-  }
-
-  messages.push({ role: 'user', content: q });
-  addBubble('user', q);
-  scrollBot(); renderHist();
-
-  // Typing
-  const tRow = document.createElement('div');
-  tRow.className = 'msg-row'; tRow.id = 'typing';
-  tRow.innerHTML = `<div class="av ai">SA</div><div class="typing"><span></span><span></span><span></span></div>`;
-  ch.appendChild(tRow); scrollBot();
-
-  busy = true;
-  document.getElementById('send-btn').disabled = true;
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-calls': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 1024,
-        system: SYSTEM,
-        messages: messages
-      })
+function applyTheme(dark){document.documentElement.className=dark?'':'light';document.getElementById('theme-ico').textContent=dark?'☀️':'🌙';document.getElementById('theme-lbl').textContent=dark?'Light Mode':'Dark Mode';localStorage.setItem('sa_theme',dark?'dark':'light');}
+function toggleTheme(){applyTheme(document.documentElement.className!=='light');}
+function openSidebar(){document.getElementById('sidebar').classList.add('open');document.getElementById('overlay').classList.add('show');}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
+function renderHist(){const el=document.getElementById('hist');if(!chats.length){el.innerHTML='<div class="no-hist">Koi purani chat nahi</div>';return;}el.innerHTML='';chats.forEach(c=>{const b=document.createElement('button');b.className='h-item'+(c.id===curId?' active':'');b.innerHTML=`<span>💬</span><span>${esc(c.title)}</span>`;b.onclick=()=>{loadChat(c.id);closeSidebar();};el.appendChild(b);});}
+function loadChat(id){const c=chats.find(x=>x.id===id);if(!c)return;curId=id;messages=[...c.messages];document.getElementById('welcome').style.display='none';const ch=document.getElementById('chat');ch.style.display='block';ch.innerHTML='';messages.forEach(m=>addBubble(m.role,m.content));scrollBot();renderHist();}
+function newChat(){curId=null;messages=[];document.getElementById('chat').style.display='none';document.getElementById('chat').innerHTML='';document.getElementById('welcome').style.display='';closeSidebar();renderHist();}
+function addBubble(role,text){const ch=document.getElementById('chat');const row=document.createElement('div');row.className='msg-row'+(role==='user'?' user':'');const isErr=text.startsWith('⚠️');row.innerHTML=`<div class="av ${role==='user'?'usr':'ai'}">${role==='user'?'👤':'SA'}</div><div class="bubble ${role==='user'?'user':(isErr?'err':'ai')}">${esc(text)}</div>`;ch.appendChild(row);}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function scrollBot(){const e=document.getElementById('scroll');e.scrollTo({top:e.scrollHeight,behavior:'smooth'});}
+function autoResize(t){t.style.height='auto';t.style.height=Math.min(t.scrollHeight,120)+'px';}
+function fillSend(t){document.getElementById('inp').value=t;send();}
+async function send(){
+  const inp=document.getElementById('inp');
+  const q=inp.value.trim();
+  if(!q||busy)return;
+  inp.value='';inp.style.height='auto';
+  document.getElementById('welcome').style.display='none';
+  const ch=document.getElementById('chat');
+  ch.style.display='block';
+  if(!curId){curId='c_'+Date.now();chats.unshift({id:curId,title:q.substring(0,30)+(q.length>30?'…':''),messages:[]});}
+  messages.push({role:'user',content:q});
+  addBubble('user',q);scrollBot();renderHist();
+  const tRow=document.createElement('div');tRow.className='msg-row';tRow.id='typing';
+  tRow.innerHTML=`<div class="av ai">SA</div><div class="typing"><span></span><span></span><span></span></div>`;
+  ch.appendChild(tRow);scrollBot();
+  busy=true;document.getElementById('send-btn').disabled=true;
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'content-type':'application/json','anthropic-version':'2023-06-01','x-api-key':KEY,'anthropic-dangerous-direct-browser-calls':'true'},
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1024,system:SYSTEM,messages:messages})
     });
-    const data = await res.json();
+    const data=await res.json();
     document.getElementById('typing')?.remove();
-    const reply = res.ok && data.content?.[0]?.text ? data.content[0].text : '⚠️ Error: ' + (data.error?.message || 'Kuch galat ho gaya');
-    messages.push({ role: 'assistant', content: reply });
-    addBubble('assistant', reply);
-    const c = chats.find(x => x.id === curId);
-    if (c) c.messages = [...messages];
-    localStorage.setItem('sa_chats', JSON.stringify(chats));
-  } catch(err) {
+    const reply=res.ok&&data.content?.[0]?.text?data.content[0].text:'⚠️ Error: '+(data.error?.message||'Dobara try karo');
+    messages.push({role:'assistant',content:reply});
+    addBubble('assistant',reply);
+    const c=chats.find(x=>x.id===curId);
+    if(c)c.messages=[...messages];
+    localStorage.setItem('sa_chats',JSON.stringify(chats));
+  }catch(err){
     document.getElementById('typing')?.remove();
-    addBubble('assistant', '⚠️ Network error. Internet check karo aur dobara try karo.');
+    addBubble('assistant','⚠️ Network error. Internet check karo aur dobara try karo.');
   }
-
-  busy = false;
-  document.getElementById('send-btn').disabled = false;
-  scrollBot(); renderHist();
+  busy=false;document.getElementById('send-btn').disabled=false;
+  scrollBot();renderHist();
 }
-
 renderHist();
 </script>
 </body>
-                                                                                                                 </html>
-    
+</html>
